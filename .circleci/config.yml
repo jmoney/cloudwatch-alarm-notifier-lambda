@@ -7,18 +7,29 @@ jobs:
     working_directory: /go/src/github.com/jmoney8080/cloudwatch-alarm-notifier-lambda
     steps:
       - checkout
-      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-      - run: dep ensure
-      - run: |
+      - run: 
+        name: Go get dpe
+        command: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: 
+        name: Dep ensure
+        command: dep ensure
+      - run: 
+        name: License Check
+        command: |
           go get -u github.com/frapposelli/wwhrd
           wwhrd check
-      - run: go test -v ./...
+      - run: 
+        name: Test
+        command: go test -v ./...
   release:
     docker:
       - image: circleci/golang:1.10
     working_directory: /go/src/github.com/jmoney8080/cloudwatch-alarm-notifier-lambda
     steps:
       - checkout
+      - run: 
+        name: Build
+        command: go build main.go
       - run:
           name: Install tools
           command: go get github.com/goreleaser/goreleaser
