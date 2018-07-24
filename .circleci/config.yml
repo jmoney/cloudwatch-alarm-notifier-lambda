@@ -4,19 +4,22 @@ jobs:
     docker:
       - image: circleci/golang:1.10
 
-    working_directory: /go/src/github.com/jmoney8080/go-gadget-slack
+    working_directory: /go/src/github.com/jmoney8080/cloudwatch-alarm-notifier-lambda
     steps:
       - checkout
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: dep ensure
       - run: go test -v ./...
   release:
     docker:
       - image: circleci/golang:1.10
-    working_directory: /go/src/github.com/jmoney8080/go-gadget-slack
+    working_directory: /go/src/github.com/jmoney8080/cloudwatch-alarm-notifier-lambda
     steps:
       - checkout
       - run:
           name: Install tools
           command: go get github.com/goreleaser/goreleaser
+
       - run:
           name: Run goreleaser
           command: goreleaser
