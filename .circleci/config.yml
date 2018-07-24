@@ -9,6 +9,9 @@ jobs:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: dep ensure
+      - run: |
+          go get -u github.com/frapposelli/wwhrd
+          wwhrd check
       - run: go test -v ./...
   release:
     docker:
