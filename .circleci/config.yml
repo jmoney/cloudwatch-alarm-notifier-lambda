@@ -8,19 +8,19 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: Go get dpe
-        command: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+          name: Go get dep
+          command: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: 
-        name: Dep ensure
-        command: dep ensure
+          name: Dep ensure
+          command: dep ensure
       - run: 
-        name: License Check
-        command: |
-          go get -u github.com/frapposelli/wwhrd
-          wwhrd check
+          name: License Check
+          command: |
+            go get -u github.com/frapposelli/wwhrd
+            wwhrd check
       - run: 
-        name: Test
-        command: go test -v ./...
+          name: Test
+          command: go test -v ./...
   release:
     docker:
       - image: circleci/golang:1.10
@@ -28,8 +28,8 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: Build
-        command: go build main.go
+          name: Build
+          command: go build main.go
       - run:
           name: Install tools
           command: go get github.com/goreleaser/goreleaser
