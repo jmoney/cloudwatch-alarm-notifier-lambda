@@ -146,7 +146,7 @@ func HandleRequest(ctx context.Context, event events.SNSEvent) error {
 
 	if len(slackAttachments) != 0 {
 		// Here we are chunking up the attachments.  Slack only allows 100 attachments in one post. While that'd be insane and absurd to do, it's a known limit
-		// we can easily account for
+		// we can easily account for in the code
 		for i := 0; i < len(slackAttachments); i += slackAttachmentsChunkSize {
 			end := i + slackAttachmentsChunkSize
 			if end > len(slackAttachments) {
