@@ -1,2 +1,4 @@
-aws-sns-slack-notifier
-aws-sns-slack-notifier.zip
+*.zip
+main*
+dist/
+vendor/
